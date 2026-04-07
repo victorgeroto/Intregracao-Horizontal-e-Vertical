@@ -1,0 +1,391 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+
+% Cores
+\definecolor{darkblue}{HTML}{1A1A2E}
+\definecolor{medgray}{HTML}{555555}
+\definecolor{lightgray}{HTML}{F5F5F5}
+
+% Formatação de seções
+\titleformat{\section}{\large\bfseries\color{darkblue}}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
+\titlespacing{\section}{0pt}{16pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+
+% Cabeçalho e rodapé
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\small\textcolor{medgray}{Integração Vertical e Horizontal --- ADS 2026/1}}
+\fancyhead[R]{\small\textcolor{medgray}{Aula 03 --- Redes Industriais}}
+\fancyfoot[C]{\small\textcolor{medgray}{\thepage}}
+
+% Espaçamento entre linhas
+\setstretch{1.4}
+
+% Hiperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\begin{document}
+
+% Título
+\begin{center}
+    {\Large\bfseries\color{darkblue} Plano Orçamentário e Análise de Viabilidade}\\[4pt]
+    {\large\bfseries Rede Industrial --- Indústria de Tijolos Ecológicos}\\[6pt]
+    {\normalsize\textcolor{medgray}{Disciplina: Integração Vertical e Horizontal \quad|\quad ADS 2026/1}}\\[2pt]
+    {\normalsize\textcolor{medgray}{Prof. Deivison Takatu}}
+\end{center}
+
+\vspace{4pt}
+\hrule height 1.5pt
+\vspace{14pt}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Contexto}
+
+Uma indústria de produção de tijolos ecológicos irá implementar uma rede industrial para
+integrar seus equipamentos de chão de fábrica com os sistemas de supervisão e gestão
+corporativa. A rede deverá conectar sensores de campo, controladores lógicos programáveis
+(CLPs), switches industriais, sistema supervisório (SCADA) e a rede corporativa, garantindo
+comunicação determinística, robusta e compatível com futuras expansões.
+
+Este documento apresenta o plano orçamentário com o levantamento técnico dos equipamentos
+necessários, a pesquisa de fornecedores com cotações, prazos e especificações, e a
+análise de viabilidade técnica e econômica da solução proposta.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Atividade 1 --- Plano Orçamentário e Levantamento Técnico}
+
+\subsection{Justificativa Técnica}
+
+Redes industriais diferem fundamentalmente das redes corporativas convencionais. Em
+ambientes de manufatura, como a produção de tijolos ecológicos, a comunicação entre
+dispositivos precisa ser \textbf{determinística} --- ou seja, garantir que os dados
+cheguem dentro de prazos previsíveis, medidos em milissegundos. Qualquer falha de
+comunicação pode interromper a linha de produção, comprometer a qualidade do produto
+ou gerar riscos operacionais.
+
+A infraestrutura proposta é baseada nos fundamentos de redes industriais estudados na
+Aula 03: dispositivos de campo (sensores e atuadores), CLPs para processamento de lógica
+de controle, switches industriais para interligação dos equipamentos, sistema supervisório
+SCADA para monitoramento e um gateway para integração com a rede corporativa e futuros
+sistemas MES/ERP.
+
+\subsection{Levantamento dos Equipamentos}
+
+A seguir, apresenta-se o levantamento técnico completo dos equipamentos necessários
+para compor a infraestrutura de comunicação e automação da indústria.
+
+\subsubsection*{1. Controlador Lógico Programável (CLP)}
+
+O CLP é o núcleo do controle de processo. Ele recebe os sinais dos sensores de campo,
+executa a lógica de controle programada e envia comandos aos atuadores (motores,
+válvulas, prensas). Para a indústria de tijolos ecológicos, o CLP precisa suportar
+entradas digitais e analógicas, comunicação via Profibus DP ou Modbus RTU/TCP e
+ter capacidade de expansão por módulos.
+
+\textbf{Equipamento selecionado:} Siemens SIMATIC S7-1200 (CPU 1214C DC/DC/DC)\\
+\textbf{Quantidade:} 2 unidades (uma principal + uma redundante)\\
+\textbf{Especificações técnicas:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=1pt]
+    \item 14 entradas digitais / 10 saídas digitais integradas
+    \item 2 entradas analógicas integradas
+    \item Comunicação: PROFINET, Modbus TCP/RTU
+    \item Tensão de alimentação: 24 VDC
+    \item Temperatura de operação: 0 a 55 °C
+    \item Grau de proteção: IP20
+\end{itemize}
+\textbf{Fornecedor:} Siemens Brasil\\
+\textbf{Preço unitário:} R\$ 4.800,00\\
+\textbf{Prazo de entrega:} 15 dias úteis
+
+\subsubsection*{2. Switch Industrial}
+
+O switch industrial é responsável por interligar todos os dispositivos da rede no chão
+de fábrica. Diferente de switches comerciais, ele é projetado para suportar vibração,
+ruído elétrico, poeira, umidade e variações de temperatura características de ambientes
+industriais. Deve suportar o protocolo PROFINET e oferecer alta disponibilidade.
+
+\textbf{Equipamento selecionado:} Siemens SCALANCE X208 (8 portas Fast Ethernet)\\
+\textbf{Quantidade:} 2 unidades\\
+\textbf{Especificações técnicas:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=1pt]
+    \item 8 portas RJ45 10/100 Mbps
+    \item Suporte a PROFINET IRT (Isochronous Real-Time)
+    \item Tensão de alimentação: 24 VDC
+    \item Temperatura de operação: -40 a 70 °C
+    \item Grau de proteção: IP30 (montagem em trilho DIN)
+    \item Diagnóstico via PROFINET e SNMP
+\end{itemize}
+\textbf{Fornecedor:} Siemens Brasil / distribuidora autorizada\\
+\textbf{Preço unitário:} R\$ 3.200,00\\
+\textbf{Prazo de entrega:} 10 dias úteis
+
+\subsubsection*{3. Sensores de Campo}
+
+Os sensores coletam as variáveis físicas do processo produtivo (temperatura da mistura,
+pressão da prensa, nível de matéria-prima no silo e presença de peças na esteira).
+Todos devem ser compatíveis com o protocolo de comunicação do CLP.
+
+\textbf{Sensores selecionados:}
+
+\begin{itemize}[leftmargin=1.5cm, itemsep=4pt]
+    \item \textbf{Sensor de temperatura:} Balluff BTL (4--20 mA, faixa 0--200 °C,
+    IP67) --- R\$ 420,00 un. --- Qtd.: 4
+    \item \textbf{Sensor de pressão:} Balluff BSP (4--20 mA, 0--10 bar, IP67) ---
+    R\$ 580,00 un. --- Qtd.: 3
+    \item \textbf{Sensor de nível ultrassônico:} Pepperl+Fuchs UB500 (IO-Link,
+    IP65, 0,2--5 m) --- R\$ 750,00 un. --- Qtd.: 2
+    \item \textbf{Sensor indutivo de proximidade:} Pepperl+Fuchs NBB (NPN, 12--24 VDC,
+    IP67) --- R\$ 180,00 un. --- Qtd.: 8
+\end{itemize}
+
+\textbf{Fornecedor:} Pepperl+Fuchs Brasil / Balluff Brasil\\
+\textbf{Prazo de entrega:} 7 a 12 dias úteis
+
+\subsubsection*{4. Cabeamento Estruturado Industrial}
+
+O cabeamento industrial deve ser blindado (STP) para resistir às interferências
+eletromagnéticas causadas por motores, inversores de frequência e cargas indutivas
+presentes no chão de fábrica. A norma aplicável é a IEC 61784 para redes PROFINET.
+
+\textbf{Materiais selecionados:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=4pt]
+    \item \textbf{Cabo PROFINET Cat5e STP industrial:} SIEMENS IE FC TP Cable GP 2x2
+    (rolo 100 m) --- R\$ 680,00 un. --- Qtd.: 3 rolos
+    \item \textbf{Conectores RJ45 industriais blindados:} Siemens IE FC RJ45 Plug 180
+    --- R\$ 45,00 un. --- Qtd.: 30
+    \item \textbf{Canaletas e eletrocalhas industriais} --- R\$ 800,00 (conjunto)
+    \item \textbf{Aterramento e proteção surto} --- R\$ 600,00 (conjunto)
+\end{itemize}
+
+\textbf{Fornecedor:} Siemens Brasil / materiais elétricos\\
+\textbf{Prazo de entrega:} 5 dias úteis
+
+\subsubsection*{5. Sistema Supervisório SCADA}
+
+O sistema SCADA permite o monitoramento remoto de todos os processos, registro
+histórico de variáveis, geração de alarmes e análise de desempenho. É o elo entre
+o chão de fábrica e a gestão da planta.
+
+\textbf{Software selecionado:} Siemens WinCC Runtime Professional (500 tags)\\
+\textbf{Quantidade:} 1 licença\\
+\textbf{Especificações:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=1pt]
+    \item Capacidade: até 500 tags de processo
+    \item Comunicação: OPC UA, PROFINET, Modbus TCP
+    \item Histórico de dados: banco de dados SQL integrado
+    \item Interface web para acesso remoto
+    \item Compatível com TIA Portal V17
+\end{itemize}
+\textbf{Fornecedor:} Siemens Brasil\\
+\textbf{Preço:} R\$ 8.500,00 (licença perpétua)\\
+\textbf{Prazo:} Disponibilidade imediata (licença digital)
+
+\subsubsection*{6. Gateway Industrial (OT/TI)}
+
+O gateway é o dispositivo que integra a rede industrial (OT) com a rede corporativa (TI),
+convertendo protocolos e garantindo que os dados de produção cheguem aos sistemas
+de gestão (ERP/MES) de forma segura. É fundamental para viabilizar a integração vertical.
+
+\textbf{Equipamento selecionado:} Moxa MGate MB3480 (Modbus para PROFINET/TCP)\\
+\textbf{Quantidade:} 1 unidade\\
+\textbf{Especificações:}
+\begin{itemize}[leftmargin=1.5cm, itemsep=1pt]
+    \item Conversão: Modbus RTU/ASCII/TCP para Ethernet TCP/IP
+    \item 4 portas seriais RS-232/422/485
+    \item Temperatura de operação: -40 a 75 °C
+    \item Montagem em trilho DIN, IP30
+    \item Configuração via web browser
+\end{itemize}
+\textbf{Fornecedor:} Moxa Brasil\\
+\textbf{Preço:} R\$ 2.900,00\\
+\textbf{Prazo de entrega:} 12 dias úteis
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Atividade 2 --- Pesquisa de Fornecedores e Cotações}
+
+\subsection{Resumo das Cotações}
+
+A tabela abaixo consolida os fornecedores pesquisados, os equipamentos cotados, os
+valores unitários, as quantidades e o custo total de cada item da infraestrutura.
+
+\vspace{8pt}
+\begin{center}
+\small
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{>{\bfseries}p{4cm} p{3.2cm} r r r}
+\toprule
+\textbf{Equipamento} & \textbf{Fornecedor} & \textbf{Vlr. Unit. (R\$)} & \textbf{Qtd.} & \textbf{Total (R\$)} \\
+\midrule
+CLP Siemens S7-1200        & Siemens Brasil         & 4.800,00 & 2  & 9.600,00  \\
+Switch SCALANCE X208       & Siemens Brasil         & 3.200,00 & 2  & 6.400,00  \\
+Sensor de temperatura      & Balluff Brasil         &   420,00 & 4  & 1.680,00  \\
+Sensor de pressão          & Balluff Brasil         &   580,00 & 3  & 1.740,00  \\
+Sensor de nível ultrass.   & Pepperl+Fuchs          &   750,00 & 2  & 1.500,00  \\
+Sensor de proximidade      & Pepperl+Fuchs          &   180,00 & 8  & 1.440,00  \\
+Cabo PROFINET STP (100 m)  & Siemens Brasil         &   680,00 & 3  & 2.040,00  \\
+Conectores RJ45 industriais& Siemens Brasil         &    45,00 & 30 & 1.350,00  \\
+Canaletas e eletrocalhas   & Mat. elétricos         &   800,00 & 1  &   800,00  \\
+Aterramento e prot. surto  & Mat. elétricos         &   600,00 & 1  &   600,00  \\
+SCADA WinCC (500 tags)     & Siemens Brasil         & 8.500,00 & 1  & 8.500,00  \\
+Gateway Moxa MGate MB3480  & Moxa Brasil            & 2.900,00 & 1  & 2.900,00  \\
+\midrule
+\multicolumn{4}{r}{\textbf{Subtotal equipamentos}}         & \textbf{38.550,00} \\
+\multicolumn{4}{r}{Instalação e comissionamento (15\%)}    &         5.782,50  \\
+\multicolumn{4}{r}{Treinamento da equipe}                  &         2.000,00  \\
+\multicolumn{4}{r}{Contingência (10\%)}                    &         3.855,00  \\
+\midrule
+\multicolumn{4}{r}{\textbf{TOTAL GERAL}}                   & \textbf{50.187,50} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{8pt}
+
+\subsection{Análise dos Fornecedores}
+
+\textbf{Siemens Brasil} é o principal fornecedor desta solução, responsável pelos CLPs,
+switches, cabeamento e software SCADA. A Siemens possui representação nacional com
+suporte técnico especializado, garantia de dois anos nos equipamentos e programa de
+treinamento certificado (TIA Portal). A padronização em um único ecossistema facilita
+a integração entre os componentes e reduz problemas de compatibilidade.
+
+\textbf{Balluff Brasil e Pepperl+Fuchs Brasil} são fornecedores consagrados de sensores
+industriais, com linha completa certificada para ambientes com grau de proteção IP65/IP67,
+compatíveis com os protocolos adotados e com estoque disponível no Brasil, o que reduz
+prazos de entrega.
+
+\textbf{Moxa Brasil} é referência global em gateways e dispositivos de comunicação
+industrial, com certificações IEC e UL para ambiente industrial. O MGate MB3480 é
+amplamente utilizado em integrações OT/TI e possui documentação técnica extensa.
+
+\subsection{Adequação ao Ambiente Industrial}
+
+Todos os equipamentos selecionados atendem às exigências do ambiente industrial da
+produção de tijolos ecológicos: grau de proteção mínimo IP30 para equipamentos em
+painel e IP65/IP67 para dispositivos de campo; faixa de temperatura de operação
+compatível com ambientes de manufatura; resistência a vibração e ruído elétrico;
+e alimentação em 24 VDC, padrão industrial.
+
+\subsection{Escalabilidade e Compatibilidade Futura}
+
+A solução foi desenhada com expansão em mente. O CLP Siemens S7-1200 suporta módulos
+de expansão adicionais de entradas/saídas sem necessidade de substituição do hardware
+principal. O switch SCALANCE X208 pode ser interligado em anel redundante (MRP) para
+aumentar a disponibilidade. O SCADA WinCC pode ser migrado para versões com maior
+número de tags conforme a planta cresce. O gateway Moxa garante que qualquer sistema
+ERP ou MES futuro (SAP, TOTVS, etc.) possa se conectar à rede industrial via TCP/IP
+sem alteração na infraestrutura de chão de fábrica.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section{Atividade 3 --- Análise de Viabilidade Técnica e Econômica}
+
+\subsection{Viabilidade Técnica}
+
+Do ponto de vista técnico, a solução é plenamente viável. Os equipamentos selecionados
+são produtos consolidados no mercado industrial brasileiro, com histórico comprovado
+em indústrias de manufatura de médio porte. A arquitetura proposta --- baseada em
+PROFINET como protocolo de rede e SCADA para supervisão --- segue as melhores práticas
+da Indústria 4.0 e é amplamente documentada e suportada.
+
+A compatibilidade entre todos os componentes foi verificada: o CLP S7-1200 se comunica
+nativamente com o switch SCALANCE via PROFINET, com o SCADA WinCC via OPC UA, e com
+o gateway Moxa via Modbus TCP. A integração com sistemas corporativos futuros (ERP,
+MES) é viabilizada pelo gateway, que expõe os dados de processo via Ethernet TCP/IP.
+
+\subsection{Análise de Custo-Benefício}
+
+O investimento total estimado é de \textbf{R\$ 50.187,50}. Para uma indústria de
+tijolos ecológicos de médio porte, este valor é compatível com o porte da solução
+e com os benefícios esperados.
+
+Os principais ganhos operacionais identificados são:
+
+\textbf{Redução de perdas por falha de processo:} Hoje, sem monitoramento automatizado,
+falhas em sensores ou equipamentos podem passar despercebidas por horas, gerando lotes
+defeituosos. Com o SCADA e os sensores integrados, alarmes são disparados em tempo
+real, reduzindo perdas estimadas em 10 a 15\% do volume produzido.
+
+\textbf{Eliminação de registros manuais:} O processo de registro de variáveis de produção
+(temperatura, pressão, ciclos) deixa de ser manual e passa a ser automatizado,
+reduzindo erros e liberando mão de obra para atividades de maior valor.
+
+\textbf{Rastreabilidade e qualidade:} O histórico gerado pelo SCADA permite rastrear
+os parâmetros de cada lote produzido, facilitando a identificação de causas de
+não conformidades e apoiando a certificação de qualidade dos tijolos.
+
+\textbf{Base para integração vertical:} A rede industrial implantada cria a infraestrutura
+necessária para, no futuro, integrar os dados de produção ao ERP da empresa, viabilizando
+planejamento integrado de produção, estoque e vendas.
+
+\subsection{Estimativa de Retorno do Investimento (ROI)}
+
+Considerando uma produção mensal de 50.000 tijolos ecológicos a R\$ 2,80 por unidade
+(receita bruta de R\$ 140.000,00/mês), a redução estimada de perdas de 12\% representa
+uma economia de R\$ 16.800,00/mês. Adicionando a redução de custos com retrabalho e
+registros manuais (estimada em R\$ 2.500,00/mês), o ganho mensal total estimado é de
+aproximadamente R\$ 19.300,00.
+
+Com base nesses dados, o tempo estimado de retorno do investimento é:
+
+\[
+\text{Payback} = \frac{\text{Investimento Total}}{\text{Ganho Mensal}} = \frac{R\$\ 50.187{,}50}{R\$\ 19.300{,}00} \approx \textbf{2{,}6 \text{ meses}}
+\]
+
+Este é um payback extremamente favorável, indicando que a solução se paga em menos
+de um trimestre operacional.
+
+\subsection{Riscos e Dependências}
+
+Os principais riscos identificados são a dependência de um único ecossistema de
+fornecimento (Siemens), que pode limitar negociações futuras de preço; a necessidade
+de capacitação da equipe técnica no ambiente TIA Portal, que demanda treinamento
+específico; e o risco de desatualização do firmware dos equipamentos, que requer
+política de atualização periódica. Esses riscos são mitigáveis por meio de contratos
+de suporte e manutenção com o fornecedor, diversificação gradual de fornecedores
+em expansões futuras e adoção de protocolos abertos (OPC UA, Modbus TCP) que
+reduzem o lock-in tecnológico.
+
+\subsection{Benefícios para o Negócio}
+
+A implementação da rede industrial transforma a indústria de tijolos ecológicos em
+uma operação digital integrada. Os benefícios vão além da redução de perdas: a empresa
+passa a ter visibilidade total do processo produtivo em tempo real, capacidade de
+tomar decisões baseadas em dados históricos e condições para crescer de forma
+escalável, adicionando novos equipamentos e áreas à rede sem redesenhar a infraestrutura.
+A integração com sistemas corporativos futuros posiciona a empresa para a transformação
+digital, aumentando sua competitividade no mercado de construção sustentável.
+
+% ─────────────────────────────────────────────────────────────────────────────
+\vspace{20pt}
+\hrule
+\vspace{6pt}
+{\small\textcolor{medgray}{
+Disciplina: Integração Vertical e Horizontal \quad|\quad
+Curso: Análise e Desenvolvimento de Sistemas \quad|\quad
+ADS 2026/1 \quad|\quad
+Prof. Deivison Takatu
+}}
+
+\end{document}
